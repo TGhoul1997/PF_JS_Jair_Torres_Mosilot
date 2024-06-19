@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h6,
+p {
+    color: blue;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.navbar nav {
+    height: 4rem;
+}
+
+.navbar nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.navbar nav ul li:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.navbar nav ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+li {
+    list-style: none;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box__div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    margin: 20px;
+    gap: 20px;
+    max-width: 60vw;
+    height: auto;
+    border: solid;
+}
+
+.box__div h1 {
+    font-size: 50px;
+    font-weight: bold;
+    border-bottom: solid black;
+    margin: 0 20px 0 20px;
+}
+
+.box__div article h2 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.box__div h3, h4 {
+    padding-left: 15px;
+    margin: 25px;
+    font-style: italic;
+}
+
+.box__div form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    margin: 20px;
+    gap: 20px;
+    max-width: 60vw;
+    max-height: 200vh;
+}
+
+#submit {
+    display: flex;
+    justify-content: center;
+    color: blue;
+    background-color: #fff;
+    border: outset;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 0 10em 0 10em;
+}
+.quoteline {
+    padding: 5px;
+}
+.quoteline p{
+    margin-bottom: 10px;
+    letter-spacing: 8px;
+}
