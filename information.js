@@ -22,26 +22,28 @@ const age = document.createElement("h4");
 
 data.addEventListener("submit", (e) => {
     e.preventDefault();
-    article.appendChild(subtitle);
-    article.appendChild(identification);
-    article.appendChild(age);
-    subtitle.innerHTML = `Hola ${clientName.value}`;
-    identification.innerHTML = `DNI: ${clientDni.value}`;
-    age.innerHTML = `Edad: ${clientAge.value}`;
-    if (data !== "") {
-        data.style.display = "none"
-    };
-});
-data.addEventListener("input", () => {
-    class Client {
-        constructor(nombre, dni, edad) {
-            this.nombre = nombre;
-            this.dni = dni;
-            this.edad = edad;
+    if (clientName.value !== "") {
+        if (clientDni.value !== "" && clientDni.value.length === 8) {
+            if (clientAge.value !== "" && parseInt(clientAge.value) >= 18) {
+                class Client {
+                    constructor(nombre, dni, edad) {
+                        this.nombre = nombre;
+                        this.dni = dni;
+                        this.edad = edad;
+                    };
+                };
+                const clientInfo = [];
+                clientInfo.push(new Client(clientName.value, clientDni.value, clientAge.value));
+                const saveInfoLocalStorage = (key, value) => {localStorage.setItem(key, value)};
+                saveInfoLocalStorage ("clientInfo", JSON.stringify(clientInfo));
+                article.appendChild(subtitle);
+                article.appendChild(identification);
+                article.appendChild(age);
+                subtitle.innerHTML = `Hola ${clientName.value.toUpperCase()}`;
+                identification.innerHTML = `DNI: ${clientDni.value}`;
+                age.innerHTML = `Edad: ${clientAge.value}`;
+                data.style.display = "none"
+            };
         };
     };
-    const clientInfo = [];
-    clientInfo.push(new Client(clientName.value, clientDni.value, clientAge.value));
-    const saveInfoLocalStorage = (key, value) => {localStorage.setItem(key, value)};
-    saveInfoLocalStorage ("clientInfo", JSON.stringify(clientInfo));
 });
