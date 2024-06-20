@@ -29,6 +29,7 @@ const imagenes = ["clasica", "oro", "platinum"];
 
 const saveCardsLocalStorage = (key, value) => { localStorage.setItem(key, value) };
 saveCardsLocalStorage("cards", JSON.stringify(cards));
+const cardsObject = JSON.parse(localStorage.getItem("cards"));
 
 const galleryContainer = document.querySelector(".slide");
 const prev = document.querySelector(".control.icon-prev");
@@ -53,8 +54,16 @@ function createGallery() {
     });
 };
 
-if (article.appendChild(subtitle)) {
-    data.style.display = "none"
+const clientOBJECT = JSON.parse(localStorage.getItem("clientInfo"));
+
+if (clientOBJECT) {
+    const form = document.getElementsByTagName("form");
+    form[0].style.display = "none";
+    subtitle.innerHTML = `Hola ${(clientOBJECT[0].nombre).toUpperCase()}`;
+    identification.innerHTML = `DNI: ${clientOBJECT[0].dni}`;
+    age.innerHTML = `Edad: ${clientOBJECT[0].edad}`;
+    btn[0].style.display = "";
+    btn[1].style.display = "";
     const selectCard = document.createElement("p");
     article.appendChild(selectCard);
     selectCard.innerHTML = "¡Selecciona la opción que más te guste!";

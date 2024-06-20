@@ -113,13 +113,6 @@ main {
     font-size: 1.5em;
     margin: 0 10em 0 10em;
 }
-.quoteline {
-    padding: 5px;
-}
-.quoteline p{
-    margin-bottom: 10px;
-    letter-spacing: 8px;
-}
 
 .btn {
     display: flex;
