@@ -45,12 +45,21 @@ a {
 li {
     list-style: none;
 }
-
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .box {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: solid;
+    max-width: 60vw;
+    height: auto;
+    margin: 20px;
 }
 
 .box__div {
@@ -60,9 +69,8 @@ li {
     padding: 10px;
     margin: 20px;
     gap: 20px;
-    max-width: 60vw;
+    width: auto;
     height: auto;
-    border: solid;
 }
 
 .box__div h1 {
@@ -111,4 +119,62 @@ li {
 .quoteline p{
     margin-bottom: 10px;
     letter-spacing: 8px;
+}
+
+.btn {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+
+.btn button {
+    background-color: chocolate;
+    width: 6rem;
+    border: none;
+    border-radius: .25rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.slide div {
+    display: flex;
+    justify-content: center;
+}
+
+.slide {
+    list-style: none;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    overflow: hidden;
+    padding: 2rem;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slide li {
+    display: none;
+    flex: 0 0 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide li img {
+    width: 400px;
+    height: 250px;
+    border-radius: 1rem;
+}
+
+.slide li.active {
+    display: block;
+}
+.control {
+    cursor: pointer;
+    padding: 10px;
 }

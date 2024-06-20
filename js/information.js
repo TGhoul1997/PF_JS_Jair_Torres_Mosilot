@@ -20,8 +20,7 @@ const subtitle = document.createElement("h2");
 const identification = document.createElement("h3");
 const age = document.createElement("h4");
 
-data.addEventListener("submit", (e) => {
-    e.preventDefault();
+data.addEventListener("submit", () => {
     if (clientName.value !== "") {
         if (clientDni.value !== "" && clientDni.value.length === 8) {
             if (clientAge.value !== "" && parseInt(clientAge.value) >= 18) {
@@ -34,16 +33,18 @@ data.addEventListener("submit", (e) => {
                 };
                 const clientInfo = [];
                 clientInfo.push(new Client(clientName.value, clientDni.value, clientAge.value));
-                const saveInfoLocalStorage = (key, value) => {localStorage.setItem(key, value)};
-                saveInfoLocalStorage ("clientInfo", JSON.stringify(clientInfo));
-                article.appendChild(subtitle);
-                article.appendChild(identification);
-                article.appendChild(age);
-                subtitle.innerHTML = `Hola ${clientName.value.toUpperCase()}`;
-                identification.innerHTML = `DNI: ${clientDni.value}`;
-                age.innerHTML = `Edad: ${clientAge.value}`;
-                data.style.display = "none"
+                const saveInfoLocalStorage = (key, value) => { localStorage.setItem(key, value) };
+                saveInfoLocalStorage("clientInfo", JSON.stringify(clientInfo));
             };
         };
     };
 });
+
+
+article.appendChild(subtitle);
+article.appendChild(identification);
+article.appendChild(age);
+subtitle.innerHTML = `Hola ${(clientName.value).toUpperCase()}`;
+identification.innerHTML = `DNI: ${clientDni.value}`;
+age.innerHTML = `Edad: ${clientAge.value}`;
+
