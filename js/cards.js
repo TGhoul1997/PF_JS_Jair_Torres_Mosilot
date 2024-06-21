@@ -42,83 +42,83 @@ if (clientOBJECT) {
     article.appendChild(selectCard);
     selectCard.innerHTML = "¡Selecciona la opción que más te guste!";
     selectCard.style.fontSize = "1.5em";
+
+    let selection = loadCardFromLocalStorage();
+
+function addCard(cardId) {
+    const card = cards.find(c => c.id === cardId);
+    if (!card) {
+        console.error("Tarjeta de Credito no encontrada");
+        return;
+    };
+
+    selection = [{
+        id: card.id,
+        image: card.image,
+        title: card.title,
+        b1: card.b1,
+        b2: card.b2,
+        b3: card.b3,
+        b4: card.b4,
+    }];
+
+    saveCardToLocalStorage();
+    renderSelection();
+    renderCards();
 };
 
+function renderCards() {
+    const cardList = document.getElementById("card-list");
+    cardList.innerHTML = "";
+    cards.forEach(card => {
+        const cardDiv = document.createElement("div");
+        cardDiv.className = "card--position"
+        cardDiv.innerHTML = `
+        <h5>${card.title}</h5>
+        <img src="img/${card.image}.webp" alt="${card.image}">
+        <p>${card.b1}</p>
+        <p>${card.b2}</p>
+        <p>${card.b3}</p>
+        <p>${card.b4}</p>
+        <button onclick="addCard(${card.id}, 1)">Seleccionar tarjeta</button>
+    `;
+        cardList.appendChild(cardDiv);
+    });
+}
 
-// let selection = loadCardFromLocalStorage();
+function renderSelection() {
+    const selectionDiv = document.getElementById("selection-list");
+    selectionDiv.innerHTML = "";
+    selection.forEach(item => {
+        const selectionItemDiv = document.createElement("div");
+        selectionItemDiv.className = "selection--position"
+        selectionItemDiv.innerHTML = `
+        <h5>${item.title}</h5>
+        <img src="img/${item.image}.webp" alt="${item.image}">
+        <p>${item.b1}</p>
+        <p>${item.b2}</p>
+        <p>${item.b3}</p>
+        <p>${item.b4}</p>
+    `;
+        selectionDiv.appendChild(selectionItemDiv);
+    });
+};
 
-// function addCard(cardId) {
-//     const card = cards.find(c => c.id === cardId);
-//     if (!card) {
-//         console.error("Tarjeta de Credito no encontrada");
-//         return;
-//     };
+function saveCardToLocalStorage() {
+    localStorage.setItem("selection", JSON.stringify(selection));
+};
 
-//     selection = [{
-//         id: card.id,
-//         image: card.image,
-//         title: card.title,
-//         b1: card.b1,
-//         b2: card.b2,
-//         b3: card.b3,
-//         b4: card.b4,
-//     }];
+function loadCardFromLocalStorage() {
+    const selectionData = localStorage.getItem("selection");
+    return selectionData ? JSON.parse(selectionData) : [];
+};
 
-//     saveCardToLocalStorage();
-//     renderSelection();
-//     renderCards();
-// };
+document.addEventListener("DOMContentLoaded", () => {
+    renderCards();
+    renderSelection();
+});
 
-// function renderCards() {
-//     const cardList = document.getElementById("card-list");
-//     cardList.innerHTML = "";
-//     cards.forEach(card => {
-//         const cardDiv = document.createElement("div");
-//         cardDiv.className = "card--position"
-//         cardDiv.innerHTML = `
-//         <h5>${card.title}</h5>
-//         <img src="img/${card.image}.webp" alt="${card.image}">
-//         <p>${card.b1}</p>
-//         <p>${card.b2}</p>
-//         <p>${card.b3}</p>
-//         <p>${card.b4}</p>
-//         <button onclick="addCard(${card.id}, 1)">Seleccionar tarjeta</button>
-//     `;
-//         cardList.appendChild(cardDiv);
-//     });
-// }
-
-// function renderSelection() {
-//     const selectionDiv = document.getElementById("selection-list");
-//     selectionDiv.innerHTML = "";
-//     selection.forEach(item => {
-//         const selectionItemDiv = document.createElement("div");
-//         selectionItemDiv.className = "selection--position"
-//         selectionItemDiv.innerHTML = `
-//         <h5>${item.title}</h5>
-//         <img src="img/${item.image}.webp" alt="${item.image}">
-//         <p>${item.b1}</p>
-//         <p>${item.b2}</p>
-//         <p>${item.b3}</p>
-//         <p>${item.b4}</p>
-//     `;
-//         selectionDiv.appendChild(selectionItemDiv);
-//     });
-// };
-
-// function saveCardToLocalStorage() {
-//     localStorage.setItem("selection", JSON.stringify(selection));
-// };
-
-// function loadCardFromLocalStorage() {
-//     const selectionData = localStorage.getItem("selection");
-//     return selectionData ? JSON.parse(selectionData) : [];
-// };
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     renderCards();
-//     renderSelection();
-// });
+};
 
 
 
