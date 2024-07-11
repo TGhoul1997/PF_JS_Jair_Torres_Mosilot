@@ -23,8 +23,7 @@ article.appendChild(subtitle);
 article.appendChild(identification);
 article.appendChild(age);
 
-data.addEventListener("submit", (e) => {
-    e.preventDefault();
+data.addEventListener("submit", () => {
     if (clientName.value !== "") {
         if (clientDni.value !== "" && clientDni.value.length === 8) {
             if (clientAge.value !== "" && parseInt(clientAge.value) >= 18) {
