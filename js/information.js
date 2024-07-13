@@ -60,8 +60,10 @@ if (clientOBJECT) {
 
     let selection = loadCardFromLocalStorage();
 
-    function addCard(cardId) {
-        const card = cards.find(c => c.id === cardId);
+    window.addCard = async function(cardId) {
+        const response = await fetch("cards.json");
+        const data = await response.json();
+        const card = data.find(c => c.id === cardId);
         if (!card) {
             console.error("Tarjeta de Credito no encontrada");
             return;
@@ -74,19 +76,21 @@ if (clientOBJECT) {
             b1: card.b1,
             b2: card.b2,
             b3: card.b3,
-            b4: card.b4,
+            b4: card.b4
         }];
 
         saveCardToLocalStorage();
         renderSelection();
     };
 
-    function renderCards() {
+    async function renderCards() {
+        const response = await fetch("./cards.json");
+        const data = await response.json();
         const cardList = document.getElementById("card-list");
         cardList.innerHTML = "";
-        cards.forEach(card => {
+        data.forEach(card => {
             const cardDiv = document.createElement("div");
-            cardDiv.className = "card--position"
+            cardDiv.className = "card--position";
             cardDiv.innerHTML = `
                 <h5>${card.title}</h5>
                 <img src="img/${card.image}.webp" alt="${card.image}">
@@ -105,7 +109,7 @@ if (clientOBJECT) {
         selectionDiv.innerHTML = "";
         selection.forEach(item => {
             const selectionItemDiv = document.createElement("div");
-            selectionItemDiv.className = "selection--position"
+            selectionItemDiv.className = "selection--position";
             selectionItemDiv.innerHTML = `
                 <h5>${item.title}</h5>
                 <img src="img/${item.image}.webp" alt="${item.image}">
@@ -117,7 +121,15 @@ if (clientOBJECT) {
             selectionDiv.appendChild(selectionItemDiv);
             if (selectionItemDiv) {
                 const divClear = document.getElementById("card-list");
-                divClear.style.display = "none"
+                divClear.style.display = "none";
+                selectCard.innerHTML = "¡Confirma tu selección con el botón aceptar!";
+                selectCard.style.textAlign = "center";
+                selectCard.style.fontSize = "1.8rem";
+                
+                const sentenceP = document.createElement("p");
+                sentenceP.innerHTML = `
+                <button onclick="addCard(${card.id}, 1)">Seleccionar tarjeta</button>
+            `;
             };
         });
     };
@@ -131,11 +143,10 @@ if (clientOBJECT) {
         return selectionData ? JSON.parse(selectionData) : [];
     };
 
-    document.addEventListener("DOMContentLoaded", () => {
-        renderCards();
+    document.addEventListener("DOMContentLoaded", async () => {
+        await renderCards();
         renderSelection();
-    });
-    
+    })
 };
 
 
