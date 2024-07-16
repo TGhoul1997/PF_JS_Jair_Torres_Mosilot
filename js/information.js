@@ -1,3 +1,6 @@
+//variables globales
+var card_list_data = [];
+
 submit.addEventListener("mouseover", () => {
     submit.style.color = "#fff";
     submit.style.backgroundColor = "blue";
@@ -9,6 +12,7 @@ submit.addEventListener("mouseout", () => {
     submit.style.backgroundColor = "#fff";
     submit.style.border = "outset";
 });
+
 let data = document.getElementById("data");
 const article = document.createElement("article");
 const section = document.getElementsByTagName("section");
@@ -19,10 +23,12 @@ const clientAge = document.getElementById("clientAge");
 const subtitle = document.createElement("h2");
 const identification = document.createElement("h3");
 const age = document.createElement("h4");
+
 article.appendChild(subtitle);
 article.appendChild(identification);
 article.appendChild(age);
 
+//evento submit del boton
 data.addEventListener("submit", () => {
     if (clientName.value !== "") {
         if (clientDni.value !== "" && clientDni.value.length === 8) {
@@ -43,8 +49,11 @@ data.addEventListener("submit", () => {
     };
 });
 
-const clientOBJECT = JSON.parse(localStorage.getItem("clientInfo"));
+//cargar la data del cliente si existe
+const clientOBJECT = JSON.parse(localStorage.getItem("clientInfo")); // null o data
 
+
+//si existe ->
 if (clientOBJECT) {
     const form = document.getElementsByTagName("form");
     form[0].style.display = "none";
@@ -60,9 +69,8 @@ if (clientOBJECT) {
 
     let selection = loadCardFromLocalStorage();
 
-    window.addCard = async function(cardId) {
-        const response = await fetch("cards.json");
-        const data = await response.json();
+    window.addCard = function(cardId) {
+        const data = card_list_data;
         const card = data.find(c => c.id === cardId);
         if (!card) {
             console.error("Tarjeta de Credito no encontrada");
@@ -79,15 +87,28 @@ if (clientOBJECT) {
             b4: card.b4
         }];
 
-        saveCardToLocalStorage();
+        //guardar en local storage
+        localStorage.setItem("selection", JSON.stringify(selection));
+
+        //renderizar la carta actual y ocultar el card list
         renderSelection();
     };
 
-    async function renderCards() {
-        const response = await fetch("./cards.json");
+    async function cargarData() {
+        const response = await fetch("./cards.json");  
         const data = await response.json();
+        card_list_data = data;
+    }
+
+    function showMessage(message) {
+        alert(message);
+    }
+
+    function renderCards() {
         const cardList = document.getElementById("card-list");
         cardList.innerHTML = "";
+        const data = card_list_data;
+
         data.forEach(card => {
             const cardDiv = document.createElement("div");
             cardDiv.className = "card--position";
@@ -106,7 +127,7 @@ if (clientOBJECT) {
 
     function renderSelection() {
         const selectionDiv = document.getElementById("selection-list");
-        selectionDiv.innerHTML = "";
+        selectionDiv.innerHTML = ""; // limpia el selection list
         selection.forEach(item => {
             const selectionItemDiv = document.createElement("div");
             selectionItemDiv.className = "selection--position";
@@ -120,6 +141,7 @@ if (clientOBJECT) {
             `;
             selectionDiv.appendChild(selectionItemDiv);
             if (selectionItemDiv) {
+                // ocultar card list, dado que estamos mostrando la selección
                 const divClear = document.getElementById("card-list");
                 divClear.style.display = "none";
                 selectCard.innerHTML = "¡Confirma tu selección con el botón aceptar!";
@@ -128,14 +150,12 @@ if (clientOBJECT) {
                 
                 const sentenceP = document.createElement("p");
                 sentenceP.innerHTML = `
-                <button onclick="addCard(${card.id}, 1)">Seleccionar tarjeta</button>
+                <button onclick="showMessage('¡Tu tarjeta ha sido seleccionada!')">Aceptar</button>
             `;
+
+                selectionDiv.appendChild(sentenceP);
             };
         });
-    };
-
-    function saveCardToLocalStorage() {
-        localStorage.setItem("selection", JSON.stringify(selection));
     };
 
     function loadCardFromLocalStorage() {
@@ -144,9 +164,9 @@ if (clientOBJECT) {
     };
 
     document.addEventListener("DOMContentLoaded", async () => {
-        await renderCards();
+        await cargarData(); // carga la data, va a esperar a que la data cargue
+        renderCards();
         renderSelection();
     })
 };
-
 
