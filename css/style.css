@@ -131,6 +131,21 @@ main {
     cursor: pointer;
 }
 
+.btn-style {
+    background-color: chocolate;
+    width: 12rem;
+    border: none;
+    border-radius: .25rem;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-weight: 800;
+}
+
 .slide div {
     display: flex;
     justify-content: center;

@@ -148,11 +148,11 @@ if (clientOBJECT) {
                 selectCard.style.textAlign = "center";
                 selectCard.style.fontSize = "1.8rem";
                 
-                const sentenceP = document.createElement("p");
-                sentenceP.innerHTML = `
-                <button class="btn" id="sweetalert">Aceptar</button>
-            `;
-                selectionDiv.appendChild(sentenceP);
+                const btnSweetAlert = document.createElement("div");
+                btnSweetAlert.innerHTML = `
+                <button id="sweetalert" class="btn-style">Enviar solicitud</button>
+                `;
+                selectionDiv.appendChild(btnSweetAlert);
                 const botonAlert = document.getElementById("sweetalert");
                 botonAlert.addEventListener("click", () => {
                     Swal.fire ( {
@@ -160,8 +160,11 @@ if (clientOBJECT) {
                         text: "¡Tu nueva tarjeta esta en camino!",
                         icon: "success",
                         timer: 2000
-                    })
+                    });
                 });
+                btnSweetAlert.style.display = "flex";
+                btnSweetAlert.style.justifyContent = "center";
+                btnSweetAlert.style.margin = "20px";
             };
         });
     };
