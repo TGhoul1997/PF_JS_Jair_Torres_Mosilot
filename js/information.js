@@ -28,7 +28,6 @@ article.appendChild(subtitle);
 article.appendChild(identification);
 article.appendChild(age);
 
-//evento submit del boton
 data.addEventListener("submit", () => {
     if (clientName.value !== "") {
         if (clientDni.value !== "" && clientDni.value.length === 8) {
@@ -49,11 +48,8 @@ data.addEventListener("submit", () => {
     };
 });
 
-//cargar la data del cliente si existe
-const clientOBJECT = JSON.parse(localStorage.getItem("clientInfo")); // null o data
+const clientOBJECT = JSON.parse(localStorage.getItem("clientInfo"));
 
-
-//si existe ->
 if (clientOBJECT) {
     const form = document.getElementsByTagName("form");
     form[0].style.display = "none";
@@ -87,10 +83,8 @@ if (clientOBJECT) {
             b4: card.b4
         }];
 
-        //guardar en local storage
         localStorage.setItem("selection", JSON.stringify(selection));
 
-        //renderizar la carta actual y ocultar el card list
         renderSelection();
     };
 
@@ -127,7 +121,7 @@ if (clientOBJECT) {
 
     function renderSelection() {
         const selectionDiv = document.getElementById("selection-list");
-        selectionDiv.innerHTML = ""; // limpia el selection list
+        selectionDiv.innerHTML = "";
         selection.forEach(item => {
             const selectionItemDiv = document.createElement("div");
             selectionItemDiv.className = "selection--position";
@@ -141,7 +135,6 @@ if (clientOBJECT) {
             `;
             selectionDiv.appendChild(selectionItemDiv);
             if (selectionItemDiv) {
-                // ocultar card list, dado que estamos mostrando la selección
                 const divClear = document.getElementById("card-list");
                 divClear.style.display = "none";
                 selectCard.innerHTML = "¡Confirma tu selección con el botón aceptar!";
@@ -175,7 +168,7 @@ if (clientOBJECT) {
     };
 
     document.addEventListener("DOMContentLoaded", async () => {
-        await cargarData(); // carga la data, va a esperar a que la data cargue
+        await cargarData();
         renderCards();
         renderSelection();
     })
