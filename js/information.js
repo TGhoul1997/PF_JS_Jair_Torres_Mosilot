@@ -150,10 +150,18 @@ if (clientOBJECT) {
                 
                 const sentenceP = document.createElement("p");
                 sentenceP.innerHTML = `
-                <button onclick="showMessage('¡Tu tarjeta ha sido seleccionada!')">Aceptar</button>
+                <button class="btn" id="sweetalert">Aceptar</button>
             `;
-
                 selectionDiv.appendChild(sentenceP);
+                const botonAlert = document.getElementById("sweetalert");
+                botonAlert.addEventListener("click", () => {
+                    Swal.fire ( {
+                        title: "Felicitaciones",
+                        text: "¡Tu nueva tarjeta esta en camino!",
+                        icon: "success",
+                        timer: 2000
+                    })
+                });
             };
         });
     };

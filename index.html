@@ -7,34 +7,42 @@
     <title>Tarjetas de Credito</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
-<body >
-    <header id="header">
+<body>
+    <header id="header" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="700">>
     </header>
     <main>
-        <div class="box">
+        <div class="box" data-aos="fade-right">
             <section class="box__div">
                 <h1>Obten tu tarjeta de Crédito</h1>
                 <form id="data">
                     <label for="">Nombre Completo:</label>
-                    <input id = "clientName" type="text">
+                    <input id="clientName" type="text">
                     <label for="">DNI:</label>
-                    <input id = "clientDni" type="text">
+                    <input id="clientDni" type="text">
                     <label for="">Edad</label>
-                    <input id = "clientAge" type="number">
+                    <input id="clientAge" type="number">
                     <input id="submit" type="submit" value="Enviar">
                 </form>
             </section>
             <div id="card-list" class="slide btn">
             </div>
             <div id="selection-list">
-                
+
             </div>
-        </div> 
+        </div>
     </main>
+
     <script src="/js/index.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        AOS.init();
+    </script>
     <script src="/js/information.js"></script>
     <script src="/js/request.js"></script>
 </body>
+
 </html>
